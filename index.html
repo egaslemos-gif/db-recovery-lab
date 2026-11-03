@@ -24,7 +24,9 @@ p{color:#607086}
     }));
     const binary=atob(pieces.join(""));
     const bytes=Uint8Array.from(binary,character=>character.charCodeAt(0));
-    const page=new TextDecoder("utf-8").decode(bytes);
+    let page=new TextDecoder("utf-8").decode(bytes);
+    // Fix the top navigation's broken target: the recovery section starts at #aria.
+    page=page.replace('href="#metodos">Recuperação</a>','href="#aria">Recuperação</a>');
     document.open();
     document.write(page);
     document.close();
