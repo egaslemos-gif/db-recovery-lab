@@ -1,14 +1,38 @@
 <!doctype html>
-<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8fafc"><title>DB Recovery Lab</title>
-<style>body{font:16px system-ui,sans-serif;background:#f7f9fc;color:#172033;display:grid;place-items:center;min-height:100vh;margin:0}main{max-width:620px;padding:32px;background:white;border:1px solid #dce4ee;border-radius:16px;box-shadow:0 8px 28px #192a4610}p{color:#607086}</style></head>
-<body><main><h1>DB Recovery Lab</h1><p id="status">A carregar o laboratório técnico…</p></main>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8fafc">
+<title>DB Recovery Lab</title>
+<style>
+body{font:16px system-ui,sans-serif;background:#f7f9fc;color:#172033;display:grid;place-items:center;min-height:100vh;margin:0}
+main{max-width:640px;padding:32px;background:white;border:1px solid #dce4ee;border-radius:16px;box-shadow:0 8px 28px #192a4610}
+p{color:#607086}
+</style>
+</head>
+<body>
+<main><h1>DB Recovery Lab</h1><p id="status">A carregar o laboratório técnico…</p></main>
 <script>
-(async()=>{try{
-const paths=["payload/part-01.txt","payload/part-02.txt","payload/part-03.txt","payload/part-04.txt","payload/part-05.txt","payload/part-06.txt","payload/part-07.txt","payload/part-08.txt","payload/part-09.txt"];
-const encoded=(await Promise.all(paths.map(async path=>{const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error("Não foi possível carregar "+path);return (await r.text()).trim()}))).join("");
-const binary=atob(encoded);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
-if(typeof DecompressionStream==="undefined")throw new Error("Este navegador não suporta descompressão gzip via DecompressionStream.");
-const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
-const page=await new Response(stream).text();document.open();document.write(page);document.close();
-}catch(error){const status=document.getElementById("status");if(status)status.textContent="Falha ao carregar o laboratório: "+error.message+". Actualize a página ou consulte o repositório."}})();
-</script></body></html>
+(async()=>{
+  try {
+    const files=["payload/part-01.txt","payload/part-02.txt","payload/part-03.txt","payload/part-04.txt","payload/part-05.txt","payload/part-06.txt","payload/part-07.txt","payload/part-08.txt","payload/part-09.txt","payload/part-10.txt","payload/part-11.txt","payload/part-12.txt"];
+    const pieces=await Promise.all(files.map(async path=>{
+      const response=await fetch(path,{cache:"no-store"});
+      if(!response.ok) throw new Error("Não foi possível carregar "+path+" (HTTP "+response.status+")");
+      return (await response.text()).trim();
+    }));
+    const binary=atob(pieces.join(""));
+    const bytes=Uint8Array.from(binary,character=>character.charCodeAt(0));
+    const page=new TextDecoder("utf-8").decode(bytes);
+    document.open();
+    document.write(page);
+    document.close();
+  } catch(error) {
+    const status=document.getElementById("status");
+    if(status) status.textContent="Falha ao carregar o laboratório: "+error.message+". Actualize a página ou consulte o repositório.";
+  }
+})();
+</script>
+</body>
+</html>
