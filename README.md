@@ -1,33 +1,34 @@
 # DB Recovery Lab
 
-Documentação técnica e laboratório didáctico em português sobre diagnóstico, recuperação e validação de MySQL/MariaDB no Windows, com foco no XAMPP.
+Portal técnico e laboratório didáctico em português sobre diagnóstico, recuperação e validação de MySQL/MariaDB em Windows, com foco no XAMPP.
 
-## GitHub Pages
+## Publicação
 
-O repositório publica a partir da branch `main` e da pasta `/(root)`. URL previsto: https://egaslemos-gif.github.io/db-recovery-lab/
+O GitHub Pages está configurado para publicar a branch `main` a partir da raiz `/(root)`.
 
-## Conteúdo didáctico
+URL do projecto: https://egaslemos-gif.github.io/db-recovery-lab/
 
-- Segurança, backups e fundamentos MySQL/MariaDB/XAMPP.
-- Diagnóstico, logs, conflitos de portas, mecanismos Aria e InnoDB.
-- Procedimentos de backup, restauro, validação e prevenção.
-- Recovery Wizard para triagem orientada por sintomas.
-- Terminal Simulator fictício, sem acesso à shell, rede ou sistema de ficheiros.
-- Recovery Case Studies e análise de incidentes.
-- DB Recovery Challenges e Knowledge Assessment com feedback automático.
-- Learning Progress local no navegador.
-- Instructor Mode com notas e gabarito.
+## Conteúdo
 
-## Estrutura técnica
+- Documentação técnica: segurança, backups, fundamentos de MySQL/MariaDB/XAMPP, diagnóstico, leitura de logs, portas, Aria, InnoDB, backup/restauro, tabelas de sistema, validação e prevenção.
+- Recovery Wizard: triagem por sintomas.
+- Terminal Simulator: terminal didáctico simulado, sem execução de comandos reais.
+- Recovery Case Studies: estudos de caso e decisões de recuperação.
+- DB Recovery Challenges: exercícios com feedback.
+- Knowledge Assessment: avaliação de conhecimentos.
+- Learning Progress: progresso local no navegador.
+- Instructor Mode: notas para o docente e respostas.
 
-- `index.html`: carregador estático que reconstrói a página integral.
-- `payload/part-01.txt` a `payload/part-09.txt`: fragmentos Base64 do HTML comprimido em gzip.
-- `references/official-sources.md`: documentação oficial de referência.
+## Estrutura
 
-Não requer backend, Node.js, instalação de dependências ou processo de build. A página completa é descomprimida no navegador via `DecompressionStream`.
+- `index.html`: carregador estático do laboratório.
+- `payload/part-01.txt` a `payload/part-12.txt`: fragmentos Base64 do HTML original, codificado em UTF-8.
+- `references/official-sources.md`: referências oficiais.
+
+O carregador reúne os fragmentos e apresenta a página integral no navegador. Não requer backend, Node.js ou processo de build.
 
 ## Segurança
 
-Faça uma cópia integral da pasta de dados antes de qualquer intervenção. Não execute `aria_chk` com MariaDB em funcionamento. `innodb_force_recovery` é um mecanismo de emergência para extracção de dados, não uma ferramenta de reparação. Adapte os procedimentos à versão instalada.
+Faça uma cópia integral da pasta de dados antes de qualquer intervenção. Não execute `aria_chk` com o MariaDB em funcionamento. `innodb_force_recovery` é um mecanismo de emergência para extracção de dados, não uma ferramenta de reparação. Adapte os procedimentos à versão instalada.
 
-O Terminal Simulator é exclusivamente didáctico. O progresso guardado em `localStorage` é local ao navegador e não identifica nem sincroniza estudantes.
+O Terminal Simulator é exclusivamente didáctico e não tem acesso à shell, rede ou sistema de ficheiros. O progresso guardado em `localStorage` é local ao navegador.
